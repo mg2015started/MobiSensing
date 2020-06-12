@@ -24,6 +24,8 @@ public class StepCountActivity extends AppCompatActivity implements SensorEventL
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         textViewCounter = findViewById(R.id.textView);
         textViewStep = findViewById(R.id.textView2);
+//        textViewCounter.setText("总步数: " + 0);
+//        textViewStep.setText("单次: " + 0);
 
     }
 

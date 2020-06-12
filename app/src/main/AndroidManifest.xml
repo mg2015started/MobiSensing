@@ -3,6 +3,7 @@
     package="com.example.coderhealth">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-feature android:name="android.hardware.camera" />
 
     <application

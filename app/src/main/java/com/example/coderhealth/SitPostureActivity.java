@@ -1,6 +1,7 @@
 package com.example.coderhealth;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ public class SitPostureActivity extends AppCompatActivity {
     private FaceArFragment arFragment;
     private ModelRenderable faceRegionsRenderable;
     private Texture faceMeshTexture;
-    TextView mTv;
+    TextView mTv, mTv2;
     AnchorNode lastAnchorNode;
     private final HashMap<AugmentedFace, AugmentedFaceNode> faceNodeMap = new HashMap<>();
 
@@ -46,6 +47,7 @@ public class SitPostureActivity extends AppCompatActivity {
         arFragment = (FaceArFragment) getSupportFragmentManager().findFragmentById(R.id.face_fragment);
 
         mTv = findViewById(R.id.mTv);
+        mTv2 = findViewById(R.id.mTv2);
         ModelRenderable.builder()
                 .setSource(this, R.raw.fox_face)
                 .build()
@@ -124,6 +126,14 @@ public class SitPostureActivity extends AppCompatActivity {
                         DecimalFormat decimalFormat = new DecimalFormat();
                         Log.d("wzz","-----" + decimalFormat.format((b1.add(r1).divide(new BigDecimal("2")))) + "m");
                         mTv.setText("到屏幕距离： " + decimalFormat.format(spec) + "cm");
+
+                        if (spec < 50) {
+                            mTv2.setText(Html.fromHtml("距离<font color='#ff0000'>过近</font>!"));
+                        }
+                        else {
+                            mTv2.setText("距离合适");
+                        }
+
 
                         if (face.getTrackingState() == TrackingState.STOPPED) {
                             Log.d("wzz","进入模式");

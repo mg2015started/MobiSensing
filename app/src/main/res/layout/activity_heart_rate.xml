@@ -23,7 +23,9 @@
             android:layout_gravity="center"
             android:layout_margin="15dp"
             android:padding="5dp"
-            android:text="Place your finger lightly on the camera lens. Try not to move it." />
+            android:text="用手指覆盖住摄像头，暂时不要移动"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
 
     </FrameLayout>
 

@@ -16,6 +16,7 @@ import android.hardware.camera2.params.StreamConfigurationMap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.text.Html;
 import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
@@ -52,6 +53,8 @@ public class HeartRateActivity extends AppCompatActivity {
     private long[] mTimeArray;
     private int numCaptures = 0;
     private int mNumBeats = 0;
+    private int beginTime;
+    private boolean begin;
     TextView tv;
 
 
@@ -65,6 +68,8 @@ public class HeartRateActivity extends AppCompatActivity {
         textureView.setSurfaceTextureListener(textureListener);
         mTimeArray = new long[15];
         tv = (TextView) findViewById(R.id.neechewalatext);
+        begin = false;
+        beginTime = 0;
         //auth = FirebaseAuth.getInstance();
     }
 
@@ -86,6 +91,7 @@ public class HeartRateActivity extends AppCompatActivity {
         @Override
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
             Log.d(TAG, "onSurfaceTextureUpdated");
+
             Bitmap bmp = textureView.getBitmap();
             int width = bmp.getWidth();
             int height = bmp.getHeight();
@@ -94,21 +100,28 @@ public class HeartRateActivity extends AppCompatActivity {
             // and totaling width/20 rows and height/20 columns
             bmp.getPixels(pixels, 0, width, width / 2, height / 2, width / 20, height / 20);
             int sum = 0;
+
             for (int i = 0; i < height * width; i++) {
                 int red = (pixels[i] >> 16) & 0xFF;
                 sum = sum + red;
             }
+
             // Waits 20 captures, to remove startup artifacts.  First average is the sum.
-            if (numCaptures == 20) {
-                mCurrentRollingAverage = sum;
+            if (!begin) {
+                if (sum > 1000000) {
+                    mCurrentRollingAverage = sum;
+                    begin = true;
+                    beginTime = numCaptures;
+                    tv.setText("检测中...");
+                }
             }
             // Next 18 averages needs to incorporate the sum with the correct N multiplier
             // in rolling average.
-            else if (numCaptures > 20 && numCaptures < 49) {
+            else if (numCaptures > beginTime && numCaptures < beginTime + 19) {
                 mCurrentRollingAverage = (mCurrentRollingAverage * (numCaptures - 20) + sum) / (numCaptures - 19);
             }
             // From 49 on, the rolling average incorporates the last 30 rolling averages.
-            else if (numCaptures >= 49) {
+            else if (numCaptures >= beginTime + 19) {
                 mCurrentRollingAverage = (mCurrentRollingAverage * 29 + sum) / 30;
                 if (mLastRollingAverage > mCurrentRollingAverage && mLastRollingAverage > mLastLastRollingAverage && mNumBeats < 15) {
                     mTimeArray[mNumBeats] = System.currentTimeMillis();
@@ -180,11 +193,16 @@ public class HeartRateActivity extends AppCompatActivity {
         addTodb();
     }
 
-    private void addTodb()
-    {
-        Log.d("YAYYY","YAYYYYYYYYYAAAAAAAA="+hrtratebpm);
-        TextView tv = (TextView)findViewById(R.id.neechewalatext);
-        tv.setText("Heart Rate = "+hrtratebpm+" BPM");
+    private void addTodb() {
+        Log.d("YAYYY", "YAYYYYYYYYYAAAAAAAA=" + hrtratebpm);
+        TextView tv = (TextView) findViewById(R.id.neechewalatext);
+        if (hrtratebpm < 100) {
+            tv.setText("你现在的心率为 " + hrtratebpm + " BPM" + ", 心率正常");
+        } else {
+            tv.setText(
+                    Html.fromHtml("你现在的心率为 " + hrtratebpm + " BPM" + ", <font color='#ff0000'>心率过快</font>")
+            );
+        }
     }
 
     protected void createCameraPreview() {
@@ -299,8 +317,7 @@ public class HeartRateActivity extends AppCompatActivity {
 }
 
 
-class HeartRate
-{
+class HeartRate {
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     int heartrate = HeartRateActivity.hrtratebpm;
 
