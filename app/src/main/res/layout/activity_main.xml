@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity"><![CDATA[
+
+android:orientation="vertical">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ]]>
+
+    <Button
+        android:id="@+id/run_button4"
+        android:layout_width="272dp"
+        android:layout_height="88dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="66dp"
+        android:layout_marginBottom="118dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="Step"
+        android:padding="16dp"
+        android:text="@string/hair_reminder"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/run_button3"
+        android:layout_width="272dp"
+        android:layout_height="88dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="254dp"
+        android:background="@color/colorAccent"
+        android:onClick="Step"
+        android:padding="16dp"
+        android:text="@string/step_count"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/run_button2"
+        android:layout_width="272dp"
+        android:layout_height="88dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="71dp"
+        android:layout_marginBottom="408dp"
+        android:background="@color/colorPrimary"
+        android:padding="16dp"
+        android:text="@string/rest_reminder"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/run_button"
+        android:layout_width="272dp"
+        android:layout_height="88dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="555dp"
+        android:background="@color/colorAccent2"
+        android:padding="16dp"
+        android:text="@string/heart_rate"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+
+</RelativeLayout>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CoderHealth</string>
+    <string name="heart_rate">心率检测</string>
+    <string name="rest_reminder">坐姿检测</string>
+    <string name="step_count">运动步数</string>
+    <string name="hair_reminder">发量检测</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
