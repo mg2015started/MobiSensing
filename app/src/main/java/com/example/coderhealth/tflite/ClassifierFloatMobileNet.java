@@ -15,6 +15,8 @@ limitations under the License.
 
 package org.tensorflow.lite.examples.classification.tflite;
 
+//        org.tensorflow.lite.examples.classification.tflite;
+
 import android.app.Activity;
 import java.io.IOException;
 import org.tensorflow.lite.examples.classification.tflite.Classifier.Device;
@@ -50,7 +52,7 @@ public class ClassifierFloatMobileNet extends Classifier {
   // TODO: Specify model.tflite as the model file and labels.txt as the label file
   @Override
   protected String getModelPath() {
-    return "model.tflite";
+    return "model_3.tflite";
   }
 
   @Override
