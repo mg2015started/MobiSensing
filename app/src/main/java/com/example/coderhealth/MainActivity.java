@@ -49,14 +49,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-//        mRunButton4 =  findViewById(R.id.run_button4);
-//        mRunButton4.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i=new Intent(MainActivity.this,AugmentedFacesActivity.class);
-//                startActivity(i);
-//            }
-//        });
+        mRunButton4 =  findViewById(R.id.run_button4);
+        mRunButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,ClassifierActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
     @Override
